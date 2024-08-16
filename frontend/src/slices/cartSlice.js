@@ -26,10 +26,14 @@ const cartSlice = createSlice({
             }
 
             //Calculate items price
+            state.itemsPrice = addDecimals(state.cartItems.reduce((acc, item) => 
+                acc + item.price * item.qty, 0
+            ));  
+
             //Calculate shipping price
             //Calculate tax price
             //Calculate total price
-        }
+        },
     },
 });
 
