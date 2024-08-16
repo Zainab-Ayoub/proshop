@@ -37,6 +37,12 @@ const cartSlice = createSlice({
             state.taxPrice = addDecimals(Number ((0.15 * state.itemsPrice).toFixed(2)));
 
             //Calculate total price
+            state.totalPrice = (
+                Number(state.itemsPrice) +
+                Number(state.shippingPrice) +
+                Number(state.taxPrice) 
+            ).toFixed(2);
+
         },
     },
 });
