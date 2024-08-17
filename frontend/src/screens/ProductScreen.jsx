@@ -21,9 +21,10 @@ const ProductScreen = () => {
   const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
 
   const addToCartHandler = () => {
-    dispatch(addToCart({...product}));
+    dispatch(addToCart({...product, qty}));
+    navigate('/cart');
   }
-  
+
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
