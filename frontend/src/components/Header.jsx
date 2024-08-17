@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import logo from '../assets/logo.png'
 
 const Header = () => {
-  const {} = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
   return (
     <header>
