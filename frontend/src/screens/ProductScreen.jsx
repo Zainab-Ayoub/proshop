@@ -12,14 +12,18 @@ import { addToCart } from '../slices/cartSlice';
 const ProductScreen = () => {
   const { id: productId } = useParams();
 
+  const dispatch = useDispatch();
+  
+  const navigate = useNavigate();
+
   const [qty, setQty] = useState(1);
-
-  const addToCartHandler = () => {
-
-  }
 
   const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
 
+  const addToCartHandler = () => {
+    dispatch(addToCart({...product}));
+  }
+  
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
