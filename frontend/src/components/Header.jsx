@@ -5,11 +5,12 @@ import { useSelector } from "react-redux";
 import logo from '../assets/logo.png'
 
 const Header = () => {
+  const {} = useSelector((state) => state.cart);
+    
   return (
     <header>
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-            <Container>
-                
+            <Container>  
                 <LinkContainer to='/'>
                 <Navbar.Brand>
                  <img src={logo} alt='ProShop'/>
