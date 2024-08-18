@@ -26,17 +26,18 @@ const CartScreen = () => {
             Your cart is empty <Link to='/'>Go Back</Link>
           </Message>
         ) : (
-          // <ListGroup variant='flush'>
-          //   {cartItems.map((item) => (
-          //     <ListGroup.Item key={item._id}>
-          //       <Row>
-          //         <Col md={2}>
-          //         </Col>
-          //         <Col></Col>
-          //       </Row>
-          //     </ListGroup.Item>
-          //   ))}
-          // </ListGroup>
+           <ListGroup variant='flush'>
+             {cartItems.map((item) => (
+              <ListGroup.Item key={item._id}>
+                 <Row>
+                   <Col md={2}>
+                     <Image src={item.image} alt={item.name} fluid rounded />
+                   </Col>
+                   <Col></Col>
+                 </Row>
+               </ListGroup.Item>
+             ))}
+           </ListGroup>
         )}
       </Col>
     </Row>
