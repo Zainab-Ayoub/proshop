@@ -55,7 +55,9 @@ const CartScreen = () => {
                       </Form.Control>
                     </Col>
                     <Col md={2}>
-                      <Button type='button' variant='light'>
+                      <Button type='button' variant='light' onClick={() => 
+                        removeFromCartHandler(item._id)
+                      }>
                         <FaTrash/>
                       </Button>  
                     </Col>
