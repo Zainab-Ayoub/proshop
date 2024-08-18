@@ -41,7 +41,7 @@ const CartScreen = () => {
                       <Form.Control
                         as='select'
                         value={item.qty}
-                        onChange={(e) => {}} 
+                        onChange={(e) => addToCartHandler(item, Number(e.target.value))} 
                       >
                         {[...Array(item.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
