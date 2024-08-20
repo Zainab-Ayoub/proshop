@@ -11,6 +11,11 @@ connectDB();
 
 const app = express();
 
+// body parser middleware
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
 app.use(express.json()); // Middleware to parse JSON bodies
