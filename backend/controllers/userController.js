@@ -24,3 +24,11 @@ const registerUser = asyncHandler(async (req, res) => {
 const logoutUser = asyncHandler(async (req, res) => {
     res.send('logout user')
 });
+
+//@desc      Get user profile
+//@route     PUT api/users/profile
+//@access    Private
+
+const getUserProfile = asyncHandler(async (req, res) => {
+    res.send('get user profile')
+});
