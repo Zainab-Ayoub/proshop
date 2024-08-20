@@ -6,7 +6,7 @@ import User from '../models/userModel.js';
 //@access    Public
 
 const authUser = asyncHandler(async (req, res) => {
-    res.send('auth user')
+    res.send('auth user');
 });
 
 //@desc      Register user
@@ -14,7 +14,7 @@ const authUser = asyncHandler(async (req, res) => {
 //@access    Public
 
 const registerUser = asyncHandler(async (req, res) => {
-    res.send('register user')
+    res.send('register user');
 });
 
 //@desc      Logout user / clear cookie
@@ -22,7 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //@access    Private
 
 const logoutUser = asyncHandler(async (req, res) => {
-    res.send('logout user')
+    res.send('logout user');
 });
 
 //@desc      Get user profile
@@ -30,7 +30,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 //@access    Private
 
 const getUserProfile = asyncHandler(async (req, res) => {
-    res.send('get user profile')
+    res.send('get user profile');
 });
 
 //@desc      Update user profile
@@ -38,15 +38,23 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //@access    Private
 
 const updateUserProfile = asyncHandler(async (req, res) => {
-    res.send('update user profile')
+    res.send('update user profile');
 });
 
-//@desc      Update users
+//@desc      Get users
 //@route     GET /api/users
 //@access    Private/Admin
 
 const getUsers = asyncHandler(async (req, res) => {
-    res.send('get users')
+    res.send('get users');
+});
+
+//@desc      Get user by ID
+//@route     GET /api/users/:id
+//@access    Private/Admin
+
+const getUserByID = asyncHandler(async (req, res) => {
+    res.send('get user by id');
 });
 
 //@desc      Delete users
@@ -54,5 +62,5 @@ const getUsers = asyncHandler(async (req, res) => {
 //@access    Private/Admin
 
 const deleteUser = asyncHandler(async (req, res) => {
-    res.send('delete user')
+    res.send('delete user');
 });
