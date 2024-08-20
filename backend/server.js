@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes); // Use productRoutes for API routes
+app.use('/api/users', userRoutes); // Use userRoutes for API routes
 
 app.use(notFound); // Middleware to handle 404 errors
 app.use(errorHandler); // Middleware to handle other errors
