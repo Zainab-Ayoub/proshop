@@ -3,11 +3,14 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
+import cors from 'cors';
 
 dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
