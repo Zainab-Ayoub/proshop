@@ -26,9 +26,17 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 //@desc      Get user profile
-//@route     PUT api/users/profile
+//@route     GET api/users/profile
 //@access    Private
 
 const getUserProfile = asyncHandler(async (req, res) => {
     res.send('get user profile')
+});
+
+//@desc      Update user profile
+//@route     PUT api/users/profile
+//@access    Private
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+    res.send('update user profile')
 });
