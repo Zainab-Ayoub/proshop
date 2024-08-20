@@ -40,3 +40,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
     res.send('update user profile')
 });
+
+//@desc      Update users
+//@route     GET api/users
+//@access    Private/Admin
+
+const getUsers = asyncHandler(async (req, res) => {
+    res.send('get users')
+});
