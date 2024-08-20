@@ -64,3 +64,11 @@ const getUserByID = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
     res.send('delete user');
 });
+
+//@desc      Update users
+//@route     UPDATE /api/users/:id
+//@access    Private/Admin
+
+const updateUser = asyncHandler(async (req, res) => {
+    res.send('update user');
+});
