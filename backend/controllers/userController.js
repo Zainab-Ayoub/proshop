@@ -72,3 +72,15 @@ const deleteUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
     res.send('update user');
 });
+
+export{
+    authUser,
+    registerUser,
+    logoutUser,
+    getUserProfile,
+    updateUserProfile,
+    getUsers,
+    getUserByID,
+    deleteUser,
+    updateUser,
+};
