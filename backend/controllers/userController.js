@@ -5,12 +5,25 @@ import User from '../models/userModel.js';
 //@route     POST /api/users/login
 //@access    Public
 
+// const authUser = asyncHandler(async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+//         console.log('Received email:', email);
+//         console.log('Received password:', password);
+//         res.send('auth user');
+//     } catch (error) {
+//         console.error('Error during authUser:', error);
+//         res.status(500).send('Server error');
+//     }
+// });
+
+
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body ;
 
     const user = await User.findOne({ email });
 
-    if (user) {
+    if (user && (await user.matchPassword(password))) {
        res.json({
         _id: user._id,
         name: user.name,
