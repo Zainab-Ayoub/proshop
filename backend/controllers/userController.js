@@ -68,6 +68,14 @@ const registerUser = asyncHandler(async (req, res) => {
         email, 
         password
     });
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      })  
+    }
 });
 
 //@desc      Logout user / clear cookie
