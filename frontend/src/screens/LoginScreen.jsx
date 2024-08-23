@@ -8,7 +8,8 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('')
 
     const submitHanlder = (e) => {
-
+        e.preventDefault()
+        console.log('submit');
     }
 
     return (
