@@ -7,13 +7,26 @@ const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const submitHanlder = (e) => {
+    const submitHandler = (e) => {
         e.preventDefault()
         console.log('submit');
     }
 
     return (
-        <div>LoginScreen</div>
+        <FormContainer>
+            <h1>Sign In</h1>
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId='email' className="my-3">
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    ></Form.Control>
+                </Form.Group>
+            </Form>
+        </FormContainer>
     )
 }
 
