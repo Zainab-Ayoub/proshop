@@ -35,6 +35,10 @@ const LoginScreen = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
+                
+                <button type="submit" variant="primary" className="mt-2">
+                    Sign In
+                </button>
             </Form>
         </FormContainer>
     )
