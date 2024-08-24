@@ -6,6 +6,7 @@ import logo from '../assets/logo.png'
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
 
   return (
     <header>
