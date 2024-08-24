@@ -81,6 +81,16 @@ const RegisterScreen = () => {
                     onChange={(e) => setPassword(e.target.value)} // Corrected this to set the password state
                     ></Form.Control>
                 </Form.Group>
+
+                <Form.Group controlId='confirmPassword' className="my-3">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                    type="password"
+                    placeholder="Confirm password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)} 
+                    ></Form.Control>
+                </Form.Group>
                 
                 <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
                     Sign In
