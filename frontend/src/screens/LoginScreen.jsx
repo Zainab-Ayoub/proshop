@@ -64,11 +64,13 @@ const LoginScreen = () => {
                     ></Form.Control>
                 </Form.Group>
                 
-                <Button type="submit" variant="primary" className="mt-2">
+                <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
                     Sign In
                 </Button>
-            </Form>
 
+                { isLoading && <Loader />}
+            </Form>
+ 
             <Row className="py-3">
                 <Col>
                   New Customer? <Link to='/register'>Register</Link>
