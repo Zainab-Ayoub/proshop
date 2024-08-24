@@ -12,7 +12,7 @@ const RegisterScreen = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, seConfirmPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const dispatch = useDispatch(); // Corrected the typo here
     const navigate = useNavigate();
