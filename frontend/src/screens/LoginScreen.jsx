@@ -23,6 +23,12 @@ const LoginScreen = () => {
     const sp = new URLSearchParams(search);
     const redirect = sp.get('redirect') || '/';
 
+    useEffect(() => {
+      if (userInfo) {
+        navigate(redirect);
+      }
+    }, [userInfo, redirect, navigate]);
+
     const submitHandler = (e) => {
         e.preventDefault()
         console.log('submit');
