@@ -29,9 +29,15 @@ const LoginScreen = () => {
       }
     }, [userInfo, redirect, navigate]);
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        console.log('submit');
+        try {
+            const res = await login({ email, password }).unwrap();
+            dispatch(setCredentials({...res, }));
+            navigate(redirect);
+        } catch (error) {
+            toast.error(err?.data?.message || error.error);
+        }
     }
 
     return (
