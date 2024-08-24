@@ -18,7 +18,11 @@ const LoginScreen = () => {
     const [ login, { isLoading }] = useLoginMutation();
 
     const { userInfo } = useSelector((state) => state.auth);
-  
+   
+    const { search } = useLocation();
+    const sp = new URLSearchParams(search);
+    const redirect = sp.get('redirect') || '/';
+
     const submitHandler = (e) => {
         e.preventDefault()
         console.log('submit');
