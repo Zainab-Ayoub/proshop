@@ -12,10 +12,10 @@ const LoginScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const disaptch = useDispatch(); 
+    const dispatch = useDispatch(); // Corrected the typo here
     const navigate = useNavigate();
     
-    const [ login, { isLoading }] = useLoginMutation();
+    const [login, { isLoading }] = useLoginMutation();
 
     const { userInfo } = useSelector((state) => state.auth);
    
@@ -30,7 +30,7 @@ const LoginScreen = () => {
     }, [userInfo, redirect, navigate]);
 
     const submitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         console.log('submit');
     }
 
@@ -54,13 +54,13 @@ const LoginScreen = () => {
                     type="password"
                     placeholder="Enter password"
                     value={password}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)} // Corrected this to set the password state
                     ></Form.Control>
                 </Form.Group>
                 
-                <button type="submit" variant="primary" className="mt-2">
+                <Button type="submit" variant="primary" className="mt-2">
                     Sign In
-                </button>
+                </Button>
             </Form>
 
             <Row className="py-3">
@@ -69,7 +69,7 @@ const LoginScreen = () => {
                 </Col>
             </Row>
         </FormContainer>
-    )
+    );
 }
 
 export default LoginScreen;
