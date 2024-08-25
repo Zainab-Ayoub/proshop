@@ -35,8 +35,16 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 
 //@desc      Update order to delivered 
 //@route     GET /api/orders/:id/deliver
-//@access    Private
+//@access    Private/Admin
 
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
     res.send('update order to delivered');
+});
+
+//@desc      Get all orders 
+//@route     GET /api/orders
+//@access    Private/Admin
+
+const getOrders = asyncHandler(async (req, res) => {
+    res.send('get all orders');
 });
