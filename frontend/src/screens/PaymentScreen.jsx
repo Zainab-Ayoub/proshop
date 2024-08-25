@@ -21,11 +21,17 @@ const PaymentScreen = () => {
     }
   }, [shippingAddress, navigate]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(savePaymentMethod(paymentMethod));
+    navigate('/placeolder');
+  }
+
   return (
     <FormContainer>
         <CheckoutSteps step1 step2 step3 />
         <h1>Payment Method</h1>
-        <Form>
+        <Form onSubmit={ submitHandler }>
             <Form.Group>
                 <Form.Label as='legend'>Select Method</Form.Label>
                 <Col>
