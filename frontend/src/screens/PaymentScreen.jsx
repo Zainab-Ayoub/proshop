@@ -15,6 +15,12 @@ const PaymentScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
+  useEffect(() => {
+    if (!shippingAddress) {
+      navigate('/shipping');
+    }
+  }, [shippingAddress, navigate]);
+
   return (
     <FormContainer>
         <CheckoutSteps step1 step2 step3 />
