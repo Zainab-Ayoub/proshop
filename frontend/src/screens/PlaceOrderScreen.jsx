@@ -6,16 +6,16 @@ import { toast } from 'react-toastify';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { useCreateOrderMutation } from '../slices/cartSlice';
+import { useCreateOrderMutation } from '../slices/ordersApiSlice.js';
 import { clearCartItems } from '../slices/cartSlice';
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart); 
+  const cart = useSelector((state) => state.cart);
 
-  const [createOrder, {isLoading, error}] = useCreateOrderMutation();
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
@@ -39,9 +39,11 @@ const PlaceOrderScreen = () => {
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (error) {
-      toast.error(error);
+      const errorMessage = error?.data?.message || error.message || 'Failed to place order. Please try again.';
+      toast.error(errorMessage);
     }
   };
+  
 
   return (
     <>
@@ -75,20 +77,20 @@ const PlaceOrderScreen = () => {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fluid
-                          rounded
-                        />
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fluid
+                            rounded
+                          />
                         </Col>
                         <Col>
                           <Link to={`/products/${item.product}`}>
                             {item.name}
                           </Link>
-                        </Col> 
+                        </Col>
                         <Col md={4}>
-                          { item.qty } x ${ item.price } = ${ item.qty * item.price }
+                          {item.qty} x ${item.price} = ${item.qty * item.price}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -131,21 +133,19 @@ const PlaceOrderScreen = () => {
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-             
-              <ListGroup.Item>
 
-              </ListGroup.Item>
-                { error && <Message variant='danger'>{error}</Message>}
+              {error && <Message variant='danger'>{error?.data?.message || error.message || 'An error occurred'}</Message>}
+
               <ListGroup.Item>
                 <Button
                   type='button'
                   className='btn-block'
                   disabled={cart.cartItems.length === 0}
-                  onClick={placeOrderHandler} 
+                  onClick={placeOrderHandler}
                 >
                   Place Order
                 </Button>
-                { isLoading && <Loader />}
+                {isLoading && <Loader />}
               </ListGroup.Item>
             </ListGroup>
           </Card>
