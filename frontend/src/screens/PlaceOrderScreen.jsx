@@ -1,18 +1,19 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import CheckoutSteps from '../components/CheckoutSteps';
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
+import CheckoutSteps from '../components/CheckoutSteps';
 import Loader from '../components/Loader';
 import { useCreateOrderMutation } from '../slices/ordersApiSlice';
 import { clearCartItems } from '../slices/cartSlice';
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
+
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
@@ -21,8 +22,9 @@ const PlaceOrderScreen = () => {
     } else if (!cart.paymentMethod) {
       navigate('/payment');
     }
-  }, [cart.paymentMethod, cart.shippingAddress, navigate]);
+  }, [cart.paymentMethod, cart.shippingAddress.address, navigate]);
 
+  const dispatch = useDispatch();
   const placeOrderHandler = async () => {
     try {
       const res = await createOrder({
@@ -37,13 +39,7 @@ const PlaceOrderScreen = () => {
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (err) {
-      if (err?.status === 401) {
-        navigate('/error/unauthorized'); // Redirect to a custom unauthorized error page
-        toast.error('You are not authorized to place an order.');
-      } else {
-        const errorMessage = err?.data?.message || err?.error || 'Something went wrong';
-        toast.error(errorMessage);
-      }
+      toast.error(err);
     }
   };
 
@@ -56,7 +52,7 @@ const PlaceOrderScreen = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Address: </strong>
+                <strong>Address:</strong>
                 {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
                 {cart.shippingAddress.postalCode},{' '}
                 {cart.shippingAddress.country}
@@ -87,12 +83,13 @@ const PlaceOrderScreen = () => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/products/${item.product}`}>
+                          <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          {item.qty} x ${item.price} = $
+                          {(item.qty * (item.price * 100)) / 100}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -110,42 +107,38 @@ const PlaceOrderScreen = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Items: </Col>
+                  <Col>Items</Col>
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping: </Col>
+                  <Col>Shipping</Col>
                   <Col>${cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax: </Col>
+                  <Col>Tax</Col>
                   <Col>${cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
-                  <Col>Total: </Col>
+                  <Col>Total</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 {error && (
-                  <Message variant='danger'>
-                    {error?.data?.message || error?.error || 'An error occurred'}
-                  </Message>
+                  <Message variant='danger'>{error.data.message}</Message>
                 )}
+              </ListGroup.Item>
+              <ListGroup.Item>
                 <Button
                   type='button'
                   className='btn-block'
-                  disabled={cart.cartItems.length === 0}
+                  disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
                 >
                   Place Order
