@@ -49,7 +49,7 @@ const PlaceOrderScreen = () => {
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
-                  {cart.orderItems.map((item, index) => (
+                  {cart.cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
@@ -59,6 +59,14 @@ const PlaceOrderScreen = () => {
                           fluid
                           rounded
                         />
+                        </Col>
+                        <Col>
+                          <Link to={`/products/${item.product}`}>
+                            {item.name}
+                          </Link>
+                        </Col> 
+                        <Col md={4}>
+                          { item.qty } x ${ item.price } = ${ item.qty * item.price }
                         </Col>
                       </Row>
                     </ListGroup.Item>
