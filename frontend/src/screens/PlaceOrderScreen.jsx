@@ -6,15 +6,13 @@ import { toast } from 'react-toastify';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { useCreateOrderMutation } from '../slices/ordersApiSlice.js';
+import { useCreateOrderMutation } from '../slices/ordersApiSlice';
 import { clearCartItems } from '../slices/cartSlice';
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart);
-
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
@@ -38,12 +36,16 @@ const PlaceOrderScreen = () => {
       }).unwrap();
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
-    } catch (error) {
-      const errorMessage = error?.data?.message || error.message || 'Failed to place order. Please try again.';
-      toast.error(errorMessage);
+    } catch (err) {
+      if (err?.status === 401) {
+        navigate('/error/unauthorized'); // Redirect to a custom unauthorized error page
+        toast.error('You are not authorized to place an order.');
+      } else {
+        const errorMessage = err?.data?.message || err?.error || 'Something went wrong';
+        toast.error(errorMessage);
+      }
     }
   };
-  
 
   return (
     <>
@@ -134,9 +136,12 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
 
-              {error && <Message variant='danger'>{error?.data?.message || error.message || 'An error occurred'}</Message>}
-
               <ListGroup.Item>
+                {error && (
+                  <Message variant='danger'>
+                    {error?.data?.message || error?.error || 'An error occurred'}
+                  </Message>
+                )}
                 <Button
                   type='button'
                   className='btn-block'
