@@ -42,6 +42,30 @@ const PlaceOrderScreen = () => {
               <strong>Method: </strong>
               {cart.paymentMethod}
             </ListGroup.Item>
+
+            <ListGroup.Item>
+              <h2>Order Items</h2>
+              {cart.cartItems.length === 0 ? (
+                <Message>Your cart is empty</Message>
+              ) : (
+                <ListGroup variant='flush'>
+                  {cart.orderItems.map((item, index) => (
+                    <ListGroup.Item key={index}>
+                      <Row>
+                        <Col md={1}>
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fluid
+                          rounded
+                        />
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              )}
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={4}>Column</Col>
