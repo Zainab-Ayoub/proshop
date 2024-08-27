@@ -74,7 +74,42 @@ const OrderScreen = () => {
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-            <Col md={4}></Col>
+
+            <Col md={4}>
+              <Card>
+                <ListGroup variant='flush'>
+                  <ListGroup.Item>
+                    <h2>Order Summary</h2>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Items</Col>
+                      <Col>${order.itemsPrice}</Col>
+                    </Row>
+
+                    <Row>
+                      <Col>Shipping</Col>
+                      <Col>${order.shippingPrice}</Col>
+                    </Row>
+
+                    <Row>
+                      <Col>Tax</Col>
+                      <Col>${order.taxPrice}</Col>
+                    </Row>
+
+                    <Row>
+                      <Col>Total</Col>
+                      <Col>${order.totalPrice}</Col>
+                    </Row>
+                  </ListGroup.Item>
+
+                  {/* PAY ORDER PLACEHOLDER */}
+                  {/* MARKS AS DELIVERED PLACEHOLDER */}
+
+                </ListGroup>
+              </Card>
+            </Col>
           </Row>
         </>
     )
