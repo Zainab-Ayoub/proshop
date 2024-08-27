@@ -41,6 +41,17 @@ const OrderScreen = () => {
                         <Message variant='danger'>Not Delivered</Message>
                     )}
                 </ListGroup.Item>
+
+                <ListGroup.Item>
+                    <h2>Payment Method</h2>
+                    <p><strong>Method: </strong>{order.paymentMethod}</p>
+                    {order.isPaid ? (
+                        <Message variant='success'>Paid on {order.paidAt}</Message>
+                    ) : (
+                        <Message variant='danger'>Not Paid</Message>
+                    )}
+                </ListGroup.Item>
+
               </ListGroup>
             </Col>
             <Col md={4}></Col>
