@@ -22,6 +22,8 @@ const OrderScreen = () => {
 
     const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
 
+    const {userInfo} = useSelector((state) => state.auth);
+
     return isLoading ? (
         <Loader />
     ) : error ? (
