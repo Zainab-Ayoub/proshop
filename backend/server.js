@@ -34,6 +34,10 @@ app.use('/api/products', productRoutes); // Use productRoutes for API routes
 app.use('/api/users', userRoutes); // Use userRoutes for API routes
 app.use('/api/orders', orderRoutes); // Use orderRoutes for API routes
 
+app.get('/api/config/paypal', (req, res) => ({
+    clientId: process.env.PAYPAL_CLIENT_ID
+}));
+
 app.use(notFound); // Middleware to handle 404 errors
 app.use(errorHandler); // Middleware to handle other errors
 
