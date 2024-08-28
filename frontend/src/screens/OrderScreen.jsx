@@ -20,6 +20,8 @@ const OrderScreen = () => {
 
     const [payOrder, {isLoading: loadingPay}] = usePayOrderMutation();
 
+    const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
+
     return isLoading ? (
         <Loader />
     ) : error ? (
