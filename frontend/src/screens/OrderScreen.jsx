@@ -18,6 +18,8 @@ const OrderScreen = () => {
         error,
     } = useGetOrderDetailsQuery(orderId);
 
+    const [payOrder, {isLoading: loadingPay}] = usePayOrderMutation();
+
     return isLoading ? (
         <Loader />
     ) : error ? (
