@@ -68,8 +68,22 @@ const OrderScreen = () => {
     function onError(err) {
       toast.error(err.message);
     }
-    
-    function createOrder() {}
+
+    function createOrder(data, actions) {
+      return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: { 
+              value: order.totalPrice,
+            },
+          },
+        ],
+      })
+      .then((orderId) => {
+        return orderId;
+      });
+    }
 
     return isLoading ? (
         <Loader />
