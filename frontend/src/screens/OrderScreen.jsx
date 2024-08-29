@@ -64,7 +64,11 @@ const OrderScreen = () => {
       refetch();
       toast.success('Payment successful');
     }
-    function onError() {}
+
+    function onError(err) {
+      toast.error(err.message);
+    }
+    
     function createOrder() {}
 
     return isLoading ? (
