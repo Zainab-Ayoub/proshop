@@ -26,6 +26,26 @@ const OrderScreen = () => {
 
     const {userInfo} = useSelector((state) => state.auth);
 
+    useEffect(() => {
+      if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+        const loadPayPalScript = async () => {
+          paypalDispatch({
+            type: 'resetOptions',
+            value: {
+              'clientId': paypal.clientId,
+              cuurency; 'USD',
+            }
+          });
+          paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
+        }
+        if (order && !order.isPaid) {
+          if (!window.paypal) {
+            loadPayPalScript();
+          }
+        }
+      }
+    }, [order, paypal, paypalDispatch, loadingPayPal, errorPayPal]);
+
     return isLoading ? (
         <Loader />
     ) : error ? (
