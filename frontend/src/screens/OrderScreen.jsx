@@ -48,6 +48,11 @@ const OrderScreen = () => {
         }
     }, [order, paypal, paypalDispatch, loadingPayPal, errorPayPal]);
 
+    function onApprove() {}
+    function onApproveTest() {}
+    function onError() {}
+    function createOrder() {}
+
     return isLoading ? (
         <Loader />
     ) : error ? (
