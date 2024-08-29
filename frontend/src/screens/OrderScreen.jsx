@@ -135,7 +135,20 @@ const OrderScreen = () => {
                                 </Row>
                             </ListGroup.Item>
 
-                            {/* PAY ORDER PLACEHOLDER */}
+                            {!order.isPaid && (
+                              <ListGroup.Item>
+                                {loadingPay && <Loader />}
+
+                                {isPending && <Loader /> : (
+                                  <div>
+                                    <Button onClick={onApproveTest} style=
+                                    {{marginButton: '10px'}}>
+                                      Test Pay Order
+                                    </Button>
+                                  </div>
+                                )}
+                              </ListGroup.Item>
+                            )}
                             {/* MARKS AS DELIVERED PLACEHOLDER */}
 
                         </ListGroup>
