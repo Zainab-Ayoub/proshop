@@ -22,6 +22,8 @@ const OrderScreen = () => {
 
     const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
 
+    const { data: paypal , isLoading: loadingPayPal, error: errorPayPal } = useGetPayPalClientIdQuery();
+
     const {userInfo} = useSelector((state) => state.auth);
 
     return isLoading ? (
