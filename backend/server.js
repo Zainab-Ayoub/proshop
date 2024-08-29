@@ -8,38 +8,50 @@ import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import cors from 'cors';
 
+// Load environment variables from .env file
 dotenv.config();
+
+// Connect to the database
 connectDB();
 
 const app = express();
 
-// body parser middleware
-
+// Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// cookie parser middleware
-
+// Middleware to parse cookies
 app.use(cookieParser());
 
-app.use(cors());
+// CORS configuration
+app.use(cors({
+    origin: 'http://localhost:3000', // Replace with your frontend URL
+    credentials: true
+}));
 
-app.use(express.json()); // Middleware to parse JSON bodies
-
-app.get('/', (req, res) => {
-    res.send('API is running...');
-});
-
+// Define routes
 app.use('/api/products', productRoutes); // Use productRoutes for API routes
 app.use('/api/users', userRoutes); // Use userRoutes for API routes
 app.use('/api/orders', orderRoutes); // Use orderRoutes for API routes
 
-app.get('/api/config/paypal', (req, res) => ({
-    clientId: process.env.PAYPAL_CLIENT_ID
-}));
+// PayPal client ID endpoint
+app.get('/api/config/paypal', (req, res) => {
+    res.json({ clientId: process.env.PAYPAL_CLIENT_ID });
+});
 
-app.use(notFound); // Middleware to handle 404 errors
-app.use(errorHandler); // Middleware to handle other errors
+// Root route
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
 
+// Middleware to handle 404 errors
+app.use(notFound);
+
+// Middleware to handle other errors
+app.use(errorHandler);
+
+// Start the server
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
