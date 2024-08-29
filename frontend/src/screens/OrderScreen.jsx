@@ -139,7 +139,7 @@ const OrderScreen = () => {
                               <ListGroup.Item>
                                 {loadingPay && <Loader />}
 
-                                {isPending && <Loader /> : (
+                                {isPending ? ( <Loader /> ) : (
                                   <div>
                                     <Button onClick={onApproveTest} style=
                                     {{marginButton: '10px'}}>
