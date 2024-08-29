@@ -59,7 +59,11 @@ const OrderScreen = () => {
         }
       });
     }
-    function onApproveTest() {}
+    async function onApproveTest() {
+      await payOrder({ orderId, details:{payer: {} } });
+      refetch();
+      toast.success('Payment successful');
+    }
     function onError() {}
     function createOrder() {}
 
