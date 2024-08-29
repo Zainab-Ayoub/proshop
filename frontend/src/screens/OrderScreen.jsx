@@ -178,16 +178,16 @@ const OrderScreen = () => {
 
                                 {isPending ? ( <Loader /> ) : (
                                   <div>
-                                    <Button onClick={onApproveTest} style=
+                                    {/* <Button onClick={onApproveTest} style=
                                     {{marginButton: '10px'}}>
                                       Test Pay Order
-                                    </Button> 
+                                    </Button>  */}
                                     <div>
-                                      <PayPalButtons
+                                      {/* <PayPalButtons
                                         createOrder={createOrder}
                                         onApprove={onApprove}
                                         onError={onError}
-                                      ></PayPalButtons>
+                                      ></PayPalButtons> */}
                                     </div>
                                   </div>
                                 )}
