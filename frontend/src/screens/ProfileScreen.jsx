@@ -18,6 +18,8 @@ const ProfileScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
+  const [updateProfile, { isLoading:loadingUpdateProfile }] = useProfileMutation();
+
   useEffect(() => {
     if (userInfo) {
       setName(userInfo.name);
