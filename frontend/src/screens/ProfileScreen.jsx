@@ -23,7 +23,11 @@ const ProfileScreen = () => {
       setName(userInfo.name);
       setEmail(userInfo.email);
     }
-  }, [userInfo.name, userInfo.email]);
+  }, [userInfo, userInfo.name, userInfo.email]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div>ProfileScreen</div>
