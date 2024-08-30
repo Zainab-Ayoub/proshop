@@ -63,6 +63,16 @@ const ProfileScreen = () => {
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
+          <Form.Group controlId="confirmPassword" className="my-2">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type="confirmPassword"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
         </Form>
       </Col>
       <Col md={9}></Col>
