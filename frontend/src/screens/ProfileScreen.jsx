@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useProfileMutation } from '../slices/usersApiSlice';
-import { useCredentials } from '../slices/authSlice';
+import { setCredentials, useCredentials } from '../slices/authSlice';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('');
@@ -27,8 +27,20 @@ const ProfileScreen = () => {
     }
   }, [userInfo, userInfo.name, userInfo.email]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+    } else {
+      try {
+        const res = await updateProfile({_id:userInfo._id, name, 
+          email, password}).unwrap();
+        dispatch(setCredentials(res));
+        toast.success('Profile updated successfully');   
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
   };
 
   return (
