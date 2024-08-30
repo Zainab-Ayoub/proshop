@@ -104,7 +104,8 @@ const ProfileScreen = () => {
        { isLoading ?  ( <Loader /> ) : error ? (<Message variant="danger">
        {error?.data?.message || error.error}
        </Message>) : (
-        <Table stripedhover responsive className="table-sm">
+        <Table striped hover responsive className="table-sm">
+
           <thead>
             <tr>
               <th>ID</th>
@@ -118,9 +119,9 @@ const ProfileScreen = () => {
           <tbody>
             { orders.map((order) => (
               <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.createdAt.subString(0, 10)}</td>
-                <td>{order.totalPrice}</td>
+                <td>{order.createdAt.substring(0, 10)}</td>
+                <td>{order.paidAt.substring(0, 10)}</td>
+                <td>{order.deliveredAt.substring(0, 10)}</td> 
                 <td>
                   { order.isPaid ? (
                     order.paidAt.substring(0, 10)
@@ -153,3 +154,5 @@ const ProfileScreen = () => {
     </Row>
   )
 }
+
+export default ProfileScreen;
