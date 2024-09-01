@@ -49,6 +49,10 @@ const ProductListScreen = () => {
                         <FaEdit />
                       </Button>
                     </LinkContainer>
+                    <Button variant='danger' className='btn-sm'
+                    onClick={() => deleteHandler(product._id)}>
+                      <FaTrash />
+                    </Button>
                   </td>
                 </tr>
               ))}
