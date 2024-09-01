@@ -6,6 +6,12 @@ import Loader from '../../components/Loader';
 import { useGetProductsQuery } from '../../slices/productsApiSlice';
 
 const ProductListScreen = () => {
+  const { data: products, isLoading, error } = useGetProductsQuery();
+
+  const deleteHandler = (id) => {
+    console.log('delete', id); 
+  } 
+
   return (
     <>
       <Row className='align-items-center'>
@@ -51,7 +57,7 @@ const ProductListScreen = () => {
                     </LinkContainer>
                     <Button variant='danger' className='btn-sm'
                     onClick={() => deleteHandler(product._id)}>
-                      <FaTrash />
+                      <FaTrash style={{ color: white }} />
                     </Button>
                   </td>
                 </tr>
