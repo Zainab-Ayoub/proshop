@@ -1,5 +1,5 @@
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button, Row, Col, Tab } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -25,9 +25,11 @@ const ProductListScreen = () => {
         </Col>
       </Row>
 
-      {isLoading ? <Loader /> : error ? <Message variant='danger'>
-        {error}
-      </Message> : (
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
         <>
           <Table striped hover responsive className='table-sm'>
             <thead>
@@ -42,7 +44,7 @@ const ProductListScreen = () => {
             </thead>
 
             <tbody>
-              {product.map((product) => (
+              {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
@@ -55,9 +57,8 @@ const ProductListScreen = () => {
                         <FaEdit />
                       </Button>
                     </LinkContainer>
-                    <Button variant='danger' className='btn-sm'
-                    onClick={() => deleteHandler(product._id)}>
-                      <FaTrash style={{ color: white }} />
+                    <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                      <FaTrash style={{ color: 'white' }} />
                     </Button>
                   </td>
                 </tr>
@@ -67,7 +68,7 @@ const ProductListScreen = () => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
-export default ProductListScreen;  
+export default ProductListScreen;
