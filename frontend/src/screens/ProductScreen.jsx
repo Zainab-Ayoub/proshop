@@ -176,6 +176,16 @@ const ProductScreen = () => {
                           <option value="5">5 - Excellent</option>
                         </Form.Control>
                     </Form.Group>
+
+                    <Form.Group controlId='comment' className='my-2'>
+                    <Form.Label>Label</Form.Label>
+                    <Form.Control
+                      as='textarea'
+                      row='3'
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)} 
+                    ></Form.Control>
+                    </Form.Group>
                   </Form>
                 )}
               </ListGroup.Item>
