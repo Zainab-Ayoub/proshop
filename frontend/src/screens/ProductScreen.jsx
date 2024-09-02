@@ -160,7 +160,7 @@ const ProductScreen = () => {
 
                 {loadingProductReview && <Loader />}
                 {userInfo ? (
-                  <Form>
+                  <Form onSubmit={ submitHandler }>
                     <Form.Group controlId='rating' className='my-2'>
                       <Form.Label>Rating</Form.Label>
                       <Form.Control
@@ -195,7 +195,9 @@ const ProductScreen = () => {
                       Submit
                     </Button>  
                   </Form>
-                )}
+                ) : ( <Message>
+                        Please <Link to='/login'>sign in</Link> to write a review{' '}
+                      </Message>)}
               </ListGroup.Item>
           </ListGroup>
         </Col>  
