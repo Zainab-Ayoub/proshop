@@ -19,6 +19,13 @@ const ProductEditScreen = () => {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
 
+  const {
+    data: product,
+    isLoading,
+    refetch,
+    error,
+  } = useUpdateProductMutation();
+
   return (
     <div>ProductEditScreen</div>
   )

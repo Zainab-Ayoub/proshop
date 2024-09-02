@@ -26,7 +26,9 @@ app.use(cookieParser());
 // CORS configuration
 app.use(cors({
     origin: 'http://localhost:3000', // Replace with your frontend URL
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+
 }));
 
 // Define routes
