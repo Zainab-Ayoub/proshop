@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -42,6 +43,9 @@ app.use('/api/upload', uploadRoutes); // Use uploadRoutes for images
 app.get('/api/config/paypal', (req, res) => {
     res.json({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
+
+const __dirname = path.resolve(); // set __dirname to current directory
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // Root route
 app.get('/', (req, res) => {
