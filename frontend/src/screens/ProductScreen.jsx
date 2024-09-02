@@ -186,6 +186,14 @@ const ProductScreen = () => {
                       onChange={(e) => setComment(e.target.value)} 
                     ></Form.Control>
                     </Form.Group>
+
+                    <Button
+                      disabled={loadingProductReview}
+                      type='submit'
+                      variant='primary'
+                    >
+                      Submit
+                    </Button>  
                   </Form>
                 )}
               </ListGroup.Item>
