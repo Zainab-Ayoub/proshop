@@ -53,7 +53,7 @@ const ProductEditScreen = () => {
         : error ? ( <Message
           variant='danger'>{error}</Message> ) : (
           <Form>
-            <Form.Group controlId='name'>
+            <Form.Group controlId='name' className='my-2'>
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type='text'
@@ -63,7 +63,7 @@ const ProductEditScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='price'>
+            <Form.Group controlId='price' className='my-2'>
               <Form.Label>Price</Form.Label>
               <Form.Control
                 type='number'
@@ -75,13 +75,23 @@ const ProductEditScreen = () => {
 
             {/* {IMAGE INPUT PLACEHOLDER}   */}
 
-            <Form.Group controlId='brand'>
+            <Form.Group controlId='brand' className='my-2'>
               <Form.Label>Brand</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Enter brand'
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
+              ></Form.Control>
+            </Form.Group> 
+
+            <Form.Group controlId='countInStock' className='my-2'>
+              <Form.Label>Count In Stock</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter countInStock'
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
               ></Form.Control>
             </Form.Group> 
 
