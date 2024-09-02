@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {Form,  Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { useGetProductDetailsQuery } from '../slices/productsApiSlice';
+import { useGetProductDetailsQuery, useCreateProductMutation, useCreateReviewMutation } from '../slices/productsApiSlice';
 import { addToCart } from '../slices/cartSlice';
 
 const ProductScreen = () => {
@@ -17,12 +18,40 @@ const ProductScreen = () => {
   const navigate = useNavigate();
 
   const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
-  const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
+  const { data: product, 
+          isLoading, 
+          error,
+          refetch 
+        } = useGetProductDetailsQuery(productId);
+
+  const [createReview, { isLoading: loadingProductReview }] =
+  useCreateReviewMutation();     
+
+  const { userInfo } = useSelector((state) => state.auth);
 
   const addToCartHandler = () => {
     dispatch(addToCart({...product, qty}));
     navigate('/cart');
+  }
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await createReview({
+        productId,
+        rating,
+        comment,
+      }).unwrap();
+      refetch();
+      toast.success('Review Submitted');
+      setRating(0);
+      setComment('');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   }
 
   return (
@@ -35,6 +64,7 @@ const ProductScreen = () => {
     error ? (
       <Message variant='danger'>{error?.data?.message || error.error}</Message>
     ) : (
+    <>  
       <Row>
         <Col md={5}>
           <Image src={product.image} alt={product.name} fluid /> 
@@ -110,7 +140,12 @@ const ProductScreen = () => {
             </ListGroup>
           </Card>        
         </Col>
-      </Row>) }
+      </Row>
+      <Row>
+          
+      </Row>
+    </>  
+    )}
 
       
     </>
