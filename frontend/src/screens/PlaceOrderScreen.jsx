@@ -39,7 +39,8 @@ const PlaceOrderScreen = () => {
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (err) {
-      toast.error(err);
+      console.error('Error creating order:', err); // Log the entire error object
+      toast.error(err?.data?.message || err.error || 'An error occurred');
     }
   };
 
@@ -97,6 +98,24 @@ const PlaceOrderScreen = () => {
                 </ListGroup>
               )}
             </ListGroup.Item>
+            <ListGroup.Item>
+              {error && (
+                <Message variant='danger'>
+                  {typeof error === 'string' ? error : error?.data?.message || 'An error occurred'}
+                </Message>
+              )}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button
+                type='button'
+                className='btn-block'
+                disabled={cart.cartItems === 0}
+                onClick={placeOrderHandler}
+              >
+                Place Order
+              </Button>
+              {isLoading && <Loader />}
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={4}>
@@ -128,22 +147,6 @@ const PlaceOrderScreen = () => {
                   <Col>Total</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                {error && (
-                  <Message variant='danger'>{error.data.message}</Message>
-                )}
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Button
-                  type='button'
-                  className='btn-block'
-                  disabled={cart.cartItems === 0}
-                  onClick={placeOrderHandler}
-                >
-                  Place Order
-                </Button>
-                {isLoading && <Loader />}
               </ListGroup.Item>
             </ListGroup>
           </Card>

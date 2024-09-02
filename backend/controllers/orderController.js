@@ -6,6 +6,7 @@ import Order from '../models/orderModel.js';
 //@access    Private
 
 const addOrderItems = asyncHandler(async (req, res) => {
+    console.log('Received order request:', req.body);
     const {
         orderItems,
         shippingAddress,
@@ -16,10 +17,22 @@ const addOrderItems = asyncHandler(async (req, res) => {
         totalPrice,
     } = req.body;
 
-    if (orderItems && orderItems.length === 0) {
+    if (!orderItems || orderItems.length === 0) {
+        console.error('No order items provided');
         res.status(400);
         throw new Error('No order items');
-    } else {
+    }
+
+    // Check for missing fields
+    const requiredFields = ['shippingAddress', 'paymentMethod', 'itemsPrice', 'taxPrice', 'shippingPrice', 'totalPrice'];
+    const missingFields = requiredFields.filter(field => !req.body[field]);
+    if (missingFields.length > 0) {
+        console.error('Missing required fields:', missingFields);
+        res.status(400);
+        throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
+    }
+
+    try {
         const order = new Order({
             orderItems: orderItems.map((x) => ({
                 ...x,
@@ -36,9 +49,12 @@ const addOrderItems = asyncHandler(async (req, res) => {
         });
 
         const createdOrder = await order.save();
-
-        // Return the newly created order
+        console.log('Order created successfully:', createdOrder);
         res.status(201).json(createdOrder);
+    } catch (error) {
+        console.error('Error creating order:', error);
+        res.status(400);
+        throw new Error('Error creating order: ' + error.message);
     }
 });
 

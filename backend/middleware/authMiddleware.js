@@ -3,13 +3,10 @@ import asyncHandler from './asyncHandler.js';
 import User from '../models/userModel.js';
 
 // Protect routes
-export const protect = asyncHandler(async (req, res, next) => {
+const protect = asyncHandler(async (req, res, next) => {
     let token;
 
-    // Log cookies for debugging
-    console.log('Cookies:', req.cookies);
-
-    // Read the JWT from the cookie
+    // Read JWT from the 'jwt' cookie
     token = req.cookies.jwt;
 
     if (token) {
@@ -27,6 +24,8 @@ export const protect = asyncHandler(async (req, res, next) => {
         throw new Error('Not authorized, no token');
     }
 });
+
+export { protect };
 
 // Admin middleware
 export const admin = (req, res, next) => {
