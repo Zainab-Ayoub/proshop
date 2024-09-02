@@ -141,8 +141,46 @@ const ProductScreen = () => {
           </Card>        
         </Col>
       </Row>
-      <Row>
-          
+      <Row className='review'>
+        <Col md={6}>
+          <h2>Reviews</h2>
+          {product.reviews.length === 0 && <Message>No Reviews</Message>}
+          <ListGroup variant='flush'>
+            {product.reviews.map(review => (
+              <ListGroup.Item key={review._id}>
+                <strong>{review.name}</strong>
+                <Rating value={review.rating}/>
+                <p>{review.createdAt.substring(0, 10)}</p>
+                <p>{review.comment}</p>
+              </ListGroup.Item>
+            ))}
+
+              <ListGroup.Item>
+                <h2>Write a Customer Review</h2>
+
+                {loadingProductReview && <Loader />}
+                {userInfo ? (
+                  <Form>
+                    <Form.Group controlId='rating' className='my-2'>
+                      <Form.Label>Rating</Form.Label>
+                      <Form.Control
+                        as='select'
+                        value={rating}
+                        onChange={(e) => setRating(Number(e.target.value))}
+                        >
+                          <option value="">Select...</option>
+                          <option value="1">1 - Poor</option>
+                          <option value="2">2 - Fair</option>
+                          <option value="3">3 - Good</option>
+                          <option value="4">4 - Very Good</option>
+                          <option value="5">5 - Excellent</option>
+                        </Form.Control>
+                    </Form.Group>
+                  </Form>
+                )}
+              </ListGroup.Item>
+          </ListGroup>
+        </Col>  
       </Row>
     </>  
     )}
