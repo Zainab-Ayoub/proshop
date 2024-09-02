@@ -37,8 +37,14 @@ const UserEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log('submitHanlder');
-    
+    try {
+      await updateUser({ userId, name, email, isAdmin });
+      toast.success('User updated successfully');
+      refetch();
+      navigate('/admin/userlist');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);  
+    }
   }
 
   return (
