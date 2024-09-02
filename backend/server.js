@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 import cors from 'cors';
 
 // Load environment variables from .env file
@@ -35,6 +36,7 @@ app.use(cors({
 app.use('/api/products', productRoutes); // Use productRoutes for API routes
 app.use('/api/users', userRoutes); // Use userRoutes for API routes
 app.use('/api/orders', orderRoutes); // Use orderRoutes for API routes
+app.use('/api/upload', uploadRoutes); // Use uploadRoutes for images
 
 // PayPal client ID endpoint
 app.get('/api/config/paypal', (req, res) => {

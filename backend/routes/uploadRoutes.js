@@ -24,7 +24,7 @@ function checkFileType(file, cb){
     }
 }
 
-const upload multer ({ 
+const upload = multer ({ 
     storage,
 });
 
