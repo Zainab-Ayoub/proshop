@@ -42,21 +42,21 @@ app.get('/api/config/paypal', (req, res) => {
     res.json({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
-const __dirname = path.resolve(); // set __dirname to current directory
+const __dirname = path.resolve(); // Set __dirname to the current directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-if(procees.env.NODE_ENV === 'production') {
-    //set static folder
-    app.use('/uploads', express.static(path.join(__dirname, '/frontend/build')));
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-    //any route that is not api will be redirected to index.html
+    // Any route that is not API will be redirected to index.html
     app.get('*', (req, res) => 
       res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
     );
 } else {
     app.get('/', (req, res) => {
         res.send('API is running...');
-    }); 
+    });
 }
 
 // Middleware to handle 404 errors
